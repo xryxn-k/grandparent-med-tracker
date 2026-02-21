@@ -1,77 +1,114 @@
-import { createClient } from "@supabase/supabase-js";
-import UploadForm from "@/components/UploadForm";
+import Link from "next/link";
+import FloatingFeatures from "@/components/FloatingFeatures";
+import JoinCTA from "@/components/JoinCTA";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-
-export default async function Home() {
-  const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
-  const { data: schedules, error } = await supabase
-    .from("medication_schedules")
-    .select("*")
-    .order("time_due", { ascending: true });
-
-  if (error) {
-    console.error("Supabase error:", error);
-  }
-
-  const medications = schedules ?? [];
-
+export default function Home(): React.ReactElement {
   return (
-    <div className="min-h-screen bg-background font-sans">
-      <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
-        <h1 className="mb-8 text-2xl font-bold text-graphite-olive">
-          Medication tracker
-        </h1>
+    <div className="relative min-h-screen overflow-hidden font-sans">
+      {/* Med-care background */}
+      <div className="absolute inset-0 bg-background" />
+      <div
+        className="absolute inset-0 opacity-[0.06]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10v40M10 30h40' stroke='%236b6559' stroke-width='1.5' fill='none'/%3E%3Cpath d='M25 15l10 10 10-10M25 45l10-10 10 10' stroke='%236b6559' stroke-width='1' fill='none'/%3E%3C/svg%3E")`,
+        }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-graphite-blush/25 via-transparent to-graphite-blush/15" />
 
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,380px)_1fr]">
-          <section className="lg:min-w-0">
-            <UploadForm />
-          </section>
+      <main className="relative z-10 mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
+        <header className="flex flex-wrap items-center justify-between gap-4 py-4">
+          <Link
+            href="/"
+            className="text-xl font-bold tracking-tight text-graphite-olive"
+          >
+            MedCare
+          </Link>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/dashboard"
+              className="rounded-xl border border-glass bg-glass px-3 py-2 text-sm font-medium text-graphite-slate shadow-soft backdrop-blur-md hover:bg-white/60"
+            >
+              Dashboard
+            </Link>
+            <Link
+              href="/login"
+              className="rounded-xl border border-glass bg-glass px-4 py-2 text-sm font-medium text-graphite-olive shadow-soft backdrop-blur-md hover:bg-white/60"
+            >
+              Sign in
+            </Link>
+          </div>
+        </header>
 
-          <section>
-            <h2 className="mb-4 text-lg font-semibold text-graphite-olive">
-              Scheduled medications
-            </h2>
-            {medications.length === 0 ? (
-              <div className="rounded-2xl border border-dashed border-graphite-muted bg-white/80 p-8 text-center backdrop-blur-sm">
-                <p className="text-graphite-slate">
-                  No medications scheduled yet. Upload a prescription to add
-                  reminders.
-                </p>
-              </div>
-            ) : (
-              <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-                {medications.map((row: {
-                  id?: string;
-                  medication_name?: string;
-                  dosage?: string;
-                  patient_phone_number?: string;
-                  time_due?: string;
-                }) => (
-                  <li
-                    key={row.id ?? `${row.patient_phone_number}-${row.time_due}-${row.medication_name}`}
-                    className="rounded-2xl border border-graphite-muted bg-white/90 p-4 shadow-sm backdrop-blur-sm"
-                  >
-                    <p className="font-medium text-graphite-olive">
-                      {row.medication_name ?? "—"}
-                    </p>
-                    <p className="mt-1 text-sm text-graphite-slate">
-                      {row.dosage ?? "—"}
-                    </p>
-                    <p className="mt-1 text-sm text-graphite-slate/90">
-                      {row.patient_phone_number ?? "—"}
-                    </p>
-                    <p className="mt-2 text-xs font-medium text-graphite-muted">
-                      Due: {row.time_due ?? "—"}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </section>
-        </div>
+        {/* Hero */}
+        <section className="py-16 text-center sm:py-24">
+          <h1
+            className="animate-fade-in-up mx-auto max-w-3xl text-4xl font-bold leading-tight text-graphite-olive sm:text-5xl lg:text-6xl"
+            style={{ animationDelay: "0.1s" }}
+          >
+            Care for your grandparents, one dose at a time
+          </h1>
+          <p
+            className="animate-fade-in-up mx-auto mt-6 max-w-xl text-lg text-graphite-slate"
+            style={{ animationDelay: "0.25s" }}
+          >
+            Upload a prescription or add medicines manually. Our AI helps you
+            keep track and never miss a reminder.
+          </p>
+          <div
+            className="animate-fade-in-up mt-12 flex justify-center"
+            style={{ animationDelay: "0.4s" }}
+          >
+            <JoinCTA />
+          </div>
+        </section>
+
+        {/* Floating feature tags */}
+        <section className="relative">
+          <FloatingFeatures />
+        </section>
+
+        {/* Feature grid */}
+        <section className="grid gap-6 py-16 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            {
+              title: "AI prescription scan",
+              desc: "Upload a photo and we extract medicines, dosage and timings automatically.",
+              icon: "📋",
+            },
+            {
+              title: "Manual entry",
+              desc: "Prefer to type? Add medicine names, dosage and times in seconds.",
+              icon: "✏️",
+            },
+            {
+              title: "Smart reminders",
+              desc: "Schedules synced so your family stays on top of every dose.",
+              icon: "⏰",
+            },
+          ].map((item, i) => (
+            <div
+              key={item.title}
+              className="animate-fade-in-up rounded-2xl border border-glass bg-glass p-6 shadow-soft backdrop-blur-md"
+              style={{ animationDelay: `${0.5 + i * 0.1}s` }}
+            >
+              <span className="text-2xl" aria-hidden>
+                {item.icon}
+              </span>
+              <h3 className="mt-3 font-semibold text-graphite-olive">
+                {item.title}
+              </h3>
+              <p className="mt-2 text-sm text-graphite-slate">{item.desc}</p>
+            </div>
+          ))}
+        </section>
+
+        {/* Bottom CTA */}
+        <section className="py-16 text-center">
+          <p className="text-graphite-slate">Ready to get started?</p>
+          <div className="mt-4">
+            <JoinCTA />
+          </div>
+        </section>
       </main>
     </div>
   );

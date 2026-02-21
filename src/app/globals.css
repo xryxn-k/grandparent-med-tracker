@@ -1,13 +1,24 @@
 @import "tailwindcss";
 
-/* Graphite theme palette */
+/* Calm, cozy theme – muted beige / soft slate + glassmorphism */
 :root {
-  --background: #F5E9E7;
-  --foreground: #837D68;
-  --graphite-muted: #C1C0C2;
-  --graphite-blush: #ECC5C6;
-  --graphite-olive: #837D68;
-  --graphite-slate: #8A9DB1;
+  --background: #e8e4df;
+  --foreground: #5c574f;
+  --graphite-muted: #b5b0a8;
+  --graphite-blush: #e2d5d2;
+  --graphite-olive: #6b6559;
+  --graphite-slate: #7a8594;
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(180, 175, 168, 0.4);
+  --shadow-soft: 0 2px 12px rgba(92, 87, 79, 0.06);
+  --shadow-diffuse: 0 4px 24px rgba(92, 87, 79, 0.08);
+  /* Pastel row tints */
+  --row-sage: rgba(192, 205, 188, 0.5);
+  --row-lavender: rgba(205, 195, 215, 0.5);
+  --row-peach: rgba(220, 200, 188, 0.5);
+  --row-sky: rgba(195, 210, 220, 0.5);
+  --row-mint: rgba(195, 218, 210, 0.5);
+  --row-blush: rgba(218, 200, 198, 0.5);
 }
 
 @theme inline {
@@ -17,6 +28,12 @@
   --color-graphite-blush: var(--graphite-blush);
   --color-graphite-olive: var(--graphite-olive);
   --color-graphite-slate: var(--graphite-slate);
+  --color-row-sage: var(--row-sage);
+  --color-row-lavender: var(--row-lavender);
+  --color-row-peach: var(--row-peach);
+  --color-row-sky: var(--row-sky);
+  --color-row-mint: var(--row-mint);
+  --color-row-blush: var(--row-blush);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -26,3 +43,55 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
+
+/* Glass panel – use with Tailwind: bg-glass border-glass shadow-soft */
+.bg-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.border-glass {
+  border-color: var(--glass-border);
+}
+.shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+.shadow-diffuse {
+  box-shadow: var(--shadow-diffuse);
+}
+
+/* Floating text animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-12px) rotate(1deg); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  33% { transform: translateY(-8px) translateX(4px); }
+  66% { transform: translateY(-4px) translateX(-4px); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes doctor-bob {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.05); }
+}
+
+.animate-float { animation: float 5s ease-in-out infinite; }
+.animate-float-slow { animation: float-slow 7s ease-in-out infinite; }
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+.animate-pulse-soft { animation: pulse-soft 2s ease-in-out infinite; }
+.doctor-bob { animation: doctor-bob 2s ease-in-out infinite; }
