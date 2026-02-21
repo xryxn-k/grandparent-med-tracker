@@ -5,6 +5,7 @@ export interface MedicationScheduleRow {
   patient_phone_number?: string;
   patient_name?: string;
   time_due?: string;
+  taken?: boolean;
 }
 
 export type PatientId = string;

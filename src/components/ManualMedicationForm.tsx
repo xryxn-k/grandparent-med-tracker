@@ -80,14 +80,14 @@ export default function ManualMedicationForm(): React.ReactElement {
 
   return (
     <div className="rounded-2xl border border-glass bg-glass p-6 shadow-soft backdrop-blur-md">
-      <h2 className="mb-4 text-lg font-semibold text-graphite-olive">
+      <h2 className="mb-4 text-lg font-semibold text-foreground">
         Add medicines manually
       </h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div>
           <label
             htmlFor="manual-patient-name"
-            className="mb-1.5 block text-sm font-medium text-graphite-slate"
+            className="mb-1.5 block text-sm font-medium text-foreground/80"
           >
             Patient name
           </label>
@@ -97,13 +97,13 @@ export default function ManualMedicationForm(): React.ReactElement {
             value={patientName}
             onChange={(e) => setPatientName(e.target.value)}
             placeholder="e.g. Grandpa Anil"
-            className="w-full rounded-xl border border-glass bg-white/10 px-3 py-2 text-graphite-olive placeholder-graphite-muted backdrop-blur-md focus:border-graphite-slate focus:outline-none focus:ring-1 focus:ring-graphite-slate"
+            className="w-full rounded-xl border border-glass bg-light-gray px-3 py-2 text-foreground placeholder-foreground/60 backdrop-blur-md focus:border-senior-green focus:outline-none focus:ring-1 focus:ring-senior-green"
           />
         </div>
         <div>
           <label
             htmlFor="manual-phone"
-            className="mb-1.5 block text-sm font-medium text-graphite-slate"
+            className="mb-1.5 block text-sm font-medium text-foreground/80"
           >
             Grandparent&apos;s Phone (+91...)
           </label>
@@ -113,20 +113,20 @@ export default function ManualMedicationForm(): React.ReactElement {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             placeholder="+91 98765 43210"
-            className="w-full rounded-xl border border-glass bg-white/10 px-3 py-2 text-graphite-olive placeholder-graphite-muted backdrop-blur-md focus:border-graphite-slate focus:outline-none focus:ring-1 focus:ring-graphite-slate"
+            className="w-full rounded-xl border border-glass bg-light-gray px-3 py-2 text-foreground placeholder-foreground/60 backdrop-blur-md focus:border-senior-green focus:outline-none focus:ring-1 focus:ring-senior-green"
             required
           />
         </div>
 
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-sm font-medium text-graphite-slate">
+            <span className="text-sm font-medium text-foreground/80">
               Medicines & times
             </span>
             <button
               type="button"
               onClick={addRow}
-              className="rounded-lg bg-graphite-blush/50 px-3 py-1.5 text-xs font-medium text-graphite-olive hover:bg-graphite-blush/70"
+              className="rounded-lg bg-secondary/50 px-3 py-1.5 text-xs font-medium text-foreground hover:bg-secondary/70"
             >
               + Add row
             </button>
@@ -134,33 +134,33 @@ export default function ManualMedicationForm(): React.ReactElement {
           {medications.map((row, i) => (
             <div
               key={i}
-              className="flex flex-wrap items-end gap-2 rounded-xl border border-glass bg-white/5 p-3 backdrop-blur-sm"
+              className="flex flex-wrap items-end gap-2 rounded-xl border border-glass bg-light-gray/10 p-3 backdrop-blur-sm"
             >
               <input
                 type="text"
                 placeholder="Medicine name"
                 value={row.medication_name}
                 onChange={(e) => updateRow(i, "medication_name", e.target.value)}
-                className="min-w-[120px] flex-1 rounded-lg border border-glass bg-white/10 px-2 py-1.5 text-sm text-graphite-olive placeholder-graphite-muted focus:border-graphite-slate focus:outline-none"
+                className="min-w-[120px] flex-1 rounded-lg border border-glass bg-light-gray px-2 py-1.5 text-sm text-foreground placeholder-foreground/60 focus:border-senior-green focus:outline-none"
               />
               <input
                 type="text"
                 placeholder="Dosage"
                 value={row.dosage}
                 onChange={(e) => updateRow(i, "dosage", e.target.value)}
-                className="w-24 rounded-lg border border-glass bg-white/10 px-2 py-1.5 text-sm text-graphite-olive placeholder-graphite-muted focus:border-graphite-slate focus:outline-none"
+                className="w-24 rounded-lg border border-glass bg-light-gray px-2 py-1.5 text-sm text-foreground placeholder-foreground/60 focus:border-senior-green focus:outline-none"
               />
               <input
                 type="time"
                 value={row.time_due}
                 onChange={(e) => updateRow(i, "time_due", e.target.value)}
-                className="rounded-lg border border-glass bg-white/10 px-2 py-1.5 text-sm text-graphite-olive focus:border-graphite-slate focus:outline-none"
+                className="rounded-lg border border-glass bg-light-gray px-2 py-1.5 text-sm text-foreground focus:border-senior-green focus:outline-none"
               />
               <button
                 type="button"
                 onClick={() => removeRow(i)}
                 disabled={medications.length === 1}
-                className="rounded-lg p-1.5 text-graphite-slate hover:bg-graphite-muted/50 disabled:opacity-40"
+                className="rounded-lg p-1.5 text-foreground/80 hover:bg-foreground/20 disabled:opacity-40"
                 aria-label="Remove row"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -172,23 +172,23 @@ export default function ManualMedicationForm(): React.ReactElement {
         </div>
 
         {error && (
-          <p className="text-sm text-red-600" role="alert">
+          <p className="text-sm text-accent" role="alert">
             {error}
           </p>
         )}
         {success && (
-          <p className="text-sm text-graphite-olive">
+          <p className="text-sm text-secondary">
             Medicines added successfully.
           </p>
         )}
         <button
           type="submit"
           disabled={isLoading}
-          className="flex items-center justify-center rounded-xl bg-goldenrod/60 px-4 py-2.5 text-sm font-medium text-cream shadow-soft transition-colors hover:bg-goldenrod/80 disabled:cursor-not-allowed disabled:opacity-60"
+          className="flex items-center justify-center rounded-xl bg-senior-green px-4 py-2.5 text-sm font-medium text-white shadow-soft transition-colors hover:bg-senior-green/90 disabled:cursor-not-allowed disabled:opacity-60"
         >
           {isLoading ? (
             <>
-              <span className="mr-2 size-4 animate-spin rounded-full border-2 border-graphite-olive border-t-transparent" />
+              <span className="mr-2 size-4 animate-spin rounded-full border-2 border-foreground border-t-transparent" />
               Saving…
             </>
           ) : (

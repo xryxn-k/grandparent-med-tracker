@@ -18,7 +18,7 @@ export default function FloatingFeatures(): React.ReactElement {
       {FEATURES.map((text, i) => (
         <div
           key={text}
-          className={`w-full rounded-2xl border border-glass px-6 py-5 text-center text-lg font-medium text-cream shadow-soft backdrop-blur-md ${ROW_TINTS[i % ROW_TINTS.length]}`}
+          className={`w-full rounded-2xl border border-glass px-6 py-5 text-center text-lg font-medium text-foreground shadow-soft backdrop-blur-md ${ROW_TINTS[i % ROW_TINTS.length]}`}
         >
           {text}
         </div>

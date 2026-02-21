@@ -28,7 +28,7 @@ export default function LandingHeader(): React.ReactElement {
       <div className="flex items-center gap-2">
         <Link
           href="/dashboard"
-          className="rounded-xl border border-glass bg-glass px-4 py-2 text-sm font-medium text-cream shadow-soft backdrop-blur-md hover:bg-white/10"
+          className="rounded-xl border border-glass bg-glass px-4 py-2 text-sm font-medium text-foreground shadow-soft backdrop-blur-md hover:bg-primary/10"
         >
           Go to Dashboard
         </Link>
@@ -40,13 +40,13 @@ export default function LandingHeader(): React.ReactElement {
     <div className="flex items-center gap-2">
       <Link
         href="/login"
-        className="rounded-xl border border-glass bg-glass px-4 py-2 text-sm font-medium text-graphite-slate shadow-soft backdrop-blur-md hover:bg-white/10"
+        className="rounded-xl border border-glass bg-glass px-4 py-2 text-sm font-medium text-foreground/80 shadow-soft backdrop-blur-md hover:bg-primary/10"
       >
         Log In
       </Link>
       <Link
         href="/login?tab=signup"
-        className="rounded-xl border border-glass bg-goldenrod/30 px-4 py-2 text-sm font-medium text-cream shadow-soft backdrop-blur-md hover:bg-goldenrod/50"
+        className="rounded-xl border border-glass bg-primary/30 px-4 py-2 text-sm font-medium text-foreground shadow-soft backdrop-blur-md hover:bg-primary/50"
       >
         Sign Up
       </Link>

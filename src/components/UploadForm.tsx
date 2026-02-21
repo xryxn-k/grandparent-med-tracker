@@ -55,14 +55,14 @@ export default function UploadForm(): React.ReactElement {
 
   return (
     <>
-      <h2 className="mb-4 text-lg font-semibold text-graphite-olive">
+      <h2 className="mb-4 text-lg font-semibold text-foreground">
         Upload prescription
       </h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div>
           <label
             htmlFor="patient-name"
-            className="mb-1.5 block text-sm font-medium text-graphite-slate"
+            className="mb-1.5 block text-sm font-medium text-foreground/80"
           >
             Patient name
           </label>
@@ -72,13 +72,13 @@ export default function UploadForm(): React.ReactElement {
             value={patientName}
             onChange={(e) => setPatientName(e.target.value)}
             placeholder="e.g. Grandma Sita"
-            className="w-full rounded-xl border border-glass bg-white/10 px-3 py-2 text-graphite-olive placeholder-graphite-muted backdrop-blur-md focus:border-graphite-slate focus:outline-none focus:ring-1 focus:ring-graphite-slate"
+            className="w-full rounded-xl border border-glass bg-light-gray px-3 py-2 text-foreground placeholder-foreground/60 backdrop-blur-md focus:border-tata-green focus:outline-none focus:ring-1 focus:ring-tata-green"
           />
         </div>
         <div>
           <label
             htmlFor="phone"
-            className="mb-1.5 block text-sm font-medium text-graphite-slate"
+            className="mb-1.5 block text-sm font-medium text-foreground/80"
           >
             Grandparent&apos;s Phone (+91...)
           </label>
@@ -88,14 +88,14 @@ export default function UploadForm(): React.ReactElement {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             placeholder="+91 98765 43210"
-            className="w-full rounded-xl border border-glass bg-white/10 px-3 py-2 text-graphite-olive placeholder-graphite-muted backdrop-blur-md focus:border-graphite-slate focus:outline-none focus:ring-1 focus:ring-graphite-slate"
+            className="w-full rounded-xl border border-glass bg-light-gray px-3 py-2 text-foreground placeholder-foreground/60 backdrop-blur-md focus:border-tata-green focus:outline-none focus:ring-1 focus:ring-tata-green"
             required
           />
         </div>
         <div>
           <label
             htmlFor="image"
-            className="mb-1.5 block text-sm font-medium text-graphite-slate"
+            className="mb-1.5 block text-sm font-medium text-foreground/80"
           >
             Prescription image
           </label>
@@ -104,28 +104,28 @@ export default function UploadForm(): React.ReactElement {
             type="file"
             accept="image/*"
             onChange={(e) => setFile(e.target.files?.[0] ?? null)}
-            className="w-full rounded-xl border border-glass bg-white/10 px-3 py-2 text-sm text-graphite-slate file:mr-3 file:rounded-lg file:border-0 file:bg-graphite-blush/60 file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-graphite-olive backdrop-blur-md focus:border-graphite-slate focus:outline-none focus:ring-1 focus:ring-graphite-slate"
+            className="w-full rounded-xl border border-glass bg-light-gray px-3 py-2 text-sm text-foreground/80 file:mr-3 file:rounded-lg file:border-0 file:bg-senior-green file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-white hover:file:bg-senior-green/90 focus:border-senior-green focus:outline-none focus:ring-1 focus:ring-senior-green"
             required
           />
         </div>
         {error && (
-          <p className="text-sm text-red-600" role="alert">
+          <p className="text-sm text-accent" role="alert">
             {error}
           </p>
         )}
         {success && (
-          <p className="text-sm text-graphite-olive">
+          <p className="text-sm text-secondary">
             Prescription uploaded successfully.
           </p>
         )}
         <button
           type="submit"
           disabled={isLoading}
-          className="flex items-center justify-center rounded-xl bg-goldenrod/60 px-4 py-2.5 text-sm font-medium text-cream shadow-soft transition-colors hover:bg-goldenrod/80 disabled:cursor-not-allowed disabled:opacity-60"
+          className="flex items-center justify-center rounded-xl bg-senior-green px-4 py-2.5 text-sm font-medium text-white shadow-soft transition-colors hover:bg-senior-green/90 disabled:cursor-not-allowed disabled:opacity-60"
         >
           {isLoading ? (
             <>
-              <span className="mr-2 size-4 animate-spin rounded-full border-2 border-graphite-olive border-t-transparent" />
+              <span className="mr-2 size-4 animate-spin rounded-full border-2 border-foreground border-t-transparent" />
               Uploading…
             </>
           ) : (

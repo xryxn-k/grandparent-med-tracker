@@ -41,38 +41,39 @@ export default async function JoinPage(): Promise<React.ReactElement> {
       patient_phone_number: row.patient_phone_number as string | undefined,
       patient_name: row.patient_name as string | undefined,
       time_due: row.time_due as string | undefined,
+      taken: row.taken as boolean | undefined,
     })
   );
 
   return (
     <div className="relative min-h-screen overflow-hidden font-sans">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#524E75] via-[#3d3958] to-[#78516D]" />
+      <div className="absolute inset-0 bg-background" />
       <div
-        className="absolute inset-0 opacity-[0.06]"
+        className="absolute inset-0 opacity-[0.02]"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10v40M10 30h40' stroke='%23FFEECB' stroke-width='1' fill='none'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10v40M10 30h40' stroke='%237CB342' stroke-width='1' fill='none'/%3E%3C/svg%3E")`,
         }}
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-[#B75D49]/10" />
+      <div className="absolute inset-0 bg-gradient-to-t from-senior-green/5 via-transparent to-senior-blue/5" />
 
-      <main className="relative z-10 mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+      <main className="relative z-10 w-full px-4 py-8 sm:px-6 lg:px-8">
         <header className="mb-8 flex flex-wrap items-center justify-between gap-4">
           <Link
             href="/"
-            className="text-lg font-bold tracking-tight text-graphite-olive"
+            className="text-lg font-bold tracking-tight text-foreground"
           >
             MedCare
           </Link>
           <div className="flex items-center gap-2">
             <Link
               href="/dashboard"
-              className="rounded-xl border border-glass bg-glass px-3 py-2 text-sm font-medium text-graphite-slate shadow-soft backdrop-blur-md hover:bg-white/10"
+              className="rounded-xl border border-glass bg-glass px-3 py-2 text-sm font-medium text-foreground/80 shadow-soft backdrop-blur-md hover:bg-primary/10"
             >
               Dashboard
             </Link>
             <Link
               href="/login"
-              className="rounded-xl border border-glass bg-glass px-3 py-2 text-sm font-medium text-graphite-olive shadow-soft backdrop-blur-md hover:bg-white/10"
+              className="rounded-xl border border-glass bg-glass px-3 py-2 text-sm font-medium text-foreground shadow-soft backdrop-blur-md hover:bg-primary/10"
             >
               Sign in
             </Link>
@@ -117,17 +118,17 @@ export default async function JoinPage(): Promise<React.ReactElement> {
                     className={`flex w-full flex-wrap items-center gap-4 border-b border-glass px-4 py-4 last:border-b-0 ${ROW_TINTS[index % ROW_TINTS.length]}`}
                   >
                     <div className="min-w-0 flex-1">
-                      <p className="font-medium text-graphite-olive">
+                      <p className="font-medium text-foreground">
                         {row.medication_name ?? "—"}
                       </p>
-                      <p className="text-sm text-graphite-slate">
+                      <p className="text-sm text-foreground/80">
                         {row.dosage ?? "—"}
                       </p>
                     </div>
-                    <div className="shrink-0 text-right text-sm text-graphite-slate">
+                    <div className="shrink-0 text-right text-sm text-foreground/80">
                       {row.patient_phone_number ?? row.patient_name ?? "—"}
                     </div>
-                    <div className="shrink-0 text-sm font-medium text-graphite-olive">
+                    <div className="shrink-0 text-sm font-medium text-foreground">
                       Due: {row.time_due ?? "—"}
                     </div>
                   </li>

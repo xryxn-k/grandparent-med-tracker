@@ -19,11 +19,11 @@ function LoginCardFallback(): React.ReactElement {
 export default function LoginPage(): React.ReactElement {
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 font-sans">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#524E75] via-[#3d3958] to-[#78516D]" />
+      <div className="absolute inset-0 bg-background" />
       <div
-        className="absolute inset-0 opacity-[0.06]"
+        className="absolute inset-0 opacity-[0.02]"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10v40M10 30h40' stroke='%23FFEECB' stroke-width='1' fill='none'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10v40M10 30h40' stroke='%237CB342' stroke-width='1' fill='none'/%3E%3C/svg%3E")`,
         }}
       />
 

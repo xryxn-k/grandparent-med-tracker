@@ -34,6 +34,7 @@ export async function PATCH(
   if (body.time_due !== undefined) updates.time_due = body.time_due;
   if (body.patient_name !== undefined) updates.patient_name = body.patient_name;
   if (body.patient_phone_number !== undefined) updates.patient_phone_number = body.patient_phone_number;
+  if (body.taken !== undefined) updates.taken = body.taken;
   if (Object.keys(updates).length === 0) {
     return Response.json({ message: "No fields to update" }, { status: 400 });
   }

@@ -1,48 +1,44 @@
 @import "tailwindcss";
 
-/* Palette: Muted Plum #78516D, Slate Blue #524E75, Terracotta #B75D49, Goldenrod #D19846, Cream #FFEECB */
+/* Palette: Senior-Friendly Calming Theme - Easy on eyes for elderly users */
 :root {
-  --background: #2a2535;
-  --foreground: #FFEECB;
-  --plum: #78516D;
-  --slate-blue: #524E75;
-  --terracotta: #B75D49;
-  --goldenrod: #D19846;
-  --cream: #FFEECB;
-  --graphite-muted: #9a8f9a;
-  --graphite-blush: #6b5268;
-  --graphite-olive: #e8dcc8;
-  --graphite-slate: #c4b8b0;
-  --glass-bg: rgba(42, 37, 53, 0.88);
-  --glass-border: rgba(255, 238, 203, 0.12);
-  --shadow-soft: 0 2px 16px rgba(0, 0, 0, 0.35);
-  --shadow-diffuse: 0 4px 28px rgba(0, 0, 0, 0.45);
-  --row-sage: rgba(120, 81, 109, 0.35);
-  --row-lavender: rgba(82, 78, 117, 0.35);
-  --row-peach: rgba(183, 93, 73, 0.25);
-  --row-sky: rgba(82, 78, 117, 0.25);
-  --row-mint: rgba(120, 81, 109, 0.25);
-  --row-blush: rgba(209, 152, 70, 0.2);
+  --background: #FAFAFA;
+  --foreground: #2C2C2C;
+  --primary: #7CB342;
+  --secondary: #4A90E2;
+  --accent: #FF6B35;
+  --senior-green: #7CB342;
+  --senior-blue: #4A90E2;
+  --senior-orange: #FF6B35;
+  --warm-gray: #F5F5F5;
+  --soft-beige: #F7F3E9;
+  --calm-blue: #E8F4F8;
+  --glass-bg: rgba(250, 250, 250, 0.95);
+  --glass-border: rgba(124, 179, 66, 0.3);
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-diffuse: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --row-light: rgba(245, 245, 245, 0.8);
+  --row-green: rgba(124, 179, 66, 0.15);
+  --row-blue: rgba(74, 144, 226, 0.15);
+  --row-warm: rgba(247, 243, 233, 0.8);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-plum: var(--plum);
-  --color-slate-blue: var(--slate-blue);
-  --color-terracotta: var(--terracotta);
-  --color-goldenrod: var(--goldenrod);
-  --color-cream: var(--cream);
-  --color-graphite-muted: var(--graphite-muted);
-  --color-graphite-blush: var(--graphite-blush);
-  --color-graphite-olive: var(--graphite-olive);
-  --color-graphite-slate: var(--graphite-slate);
-  --color-row-sage: var(--row-sage);
-  --color-row-lavender: var(--row-lavender);
-  --color-row-peach: var(--row-peach);
-  --color-row-sky: var(--row-sky);
-  --color-row-mint: var(--row-mint);
-  --color-row-blush: var(--row-blush);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-senior-green: var(--senior-green);
+  --color-senior-blue: var(--senior-blue);
+  --color-senior-orange: var(--senior-orange);
+  --color-warm-gray: var(--warm-gray);
+  --color-soft-beige: var(--soft-beige);
+  --color-calm-blue: var(--calm-blue);
+  --color-row-light: var(--row-light);
+  --color-row-green: var(--row-green);
+  --color-row-blue: var(--row-blue);
+  --color-row-warm: var(--row-warm);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }

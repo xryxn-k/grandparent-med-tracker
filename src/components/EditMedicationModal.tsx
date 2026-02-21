@@ -57,50 +57,50 @@ export default function EditMedicationModal({
         className="w-full max-w-md rounded-2xl border border-glass bg-glass p-6 shadow-diffuse backdrop-blur-md"
         onClick={(e) => e.stopPropagation()}
       >
-        <h3 className="mb-4 text-lg font-semibold text-cream">Edit medication</h3>
+        <h3 className="mb-4 text-lg font-semibold text-foreground">Edit medication</h3>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div>
-            <label className="mb-1.5 block text-sm font-medium text-graphite-slate">Medicine name</label>
+            <label className="mb-1.5 block text-sm font-medium text-foreground/80">Medicine name</label>
             <input
               type="text"
               value={medication_name}
               onChange={(e) => setMedicationName(e.target.value)}
-              className="w-full rounded-xl border border-glass bg-white/10 px-3 py-2 text-graphite-olive focus:border-graphite-slate focus:outline-none focus:ring-1 focus:ring-graphite-slate"
+              className="w-full rounded-xl border border-glass bg-light-gray px-3 py-2 text-foreground focus:border-senior-green focus:outline-none focus:ring-1 focus:ring-senior-green"
               required
             />
           </div>
           <div>
-            <label className="mb-1.5 block text-sm font-medium text-graphite-slate">Dosage</label>
+            <label className="mb-1.5 block text-sm font-medium text-foreground/80">Dosage</label>
             <input
               type="text"
               value={dosage}
               onChange={(e) => setDosage(e.target.value)}
-              className="w-full rounded-xl border border-glass bg-white/10 px-3 py-2 text-graphite-olive focus:border-graphite-slate focus:outline-none focus:ring-1 focus:ring-graphite-slate"
+              className="w-full rounded-xl border border-glass bg-light-gray px-3 py-2 text-foreground focus:border-senior-green focus:outline-none focus:ring-1 focus:ring-senior-green"
             />
           </div>
           <div>
-            <label className="mb-1.5 block text-sm font-medium text-graphite-slate">Time due</label>
+            <label className="mb-1.5 block text-sm font-medium text-foreground/80">Time due</label>
             <input
               type="time"
               value={time_due}
               onChange={(e) => setTimeDue(e.target.value)}
-              className="w-full rounded-xl border border-glass bg-white/10 px-3 py-2 text-graphite-olive focus:border-graphite-slate focus:outline-none focus:ring-1 focus:ring-graphite-slate"
+              className="w-full rounded-xl border border-glass bg-light-gray px-3 py-2 text-foreground focus:border-senior-green focus:outline-none focus:ring-1 focus:ring-senior-green"
               required
             />
           </div>
-          {error && <p className="text-sm text-red-400" role="alert">{error}</p>}
+          {error && <p className="text-sm text-accent" role="alert">{error}</p>}
           <div className="flex gap-2">
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 rounded-xl border border-glass bg-white/10 px-4 py-2 text-sm font-medium text-graphite-slate hover:bg-white/20"
+              className="flex-1 rounded-xl border border-glass bg-light-gray px-4 py-2 text-sm font-medium text-foreground/80 hover:bg-medium-gray"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isLoading}
-              className="flex-1 rounded-xl bg-goldenrod/60 px-4 py-2 text-sm font-medium text-cream hover:bg-goldenrod/80 disabled:opacity-60"
+              className="flex-1 rounded-xl bg-senior-green px-4 py-2 text-sm font-medium text-white hover:bg-senior-green/90 disabled:opacity-60"
             >
               {isLoading ? "Saving…" : "Save"}
             </button>

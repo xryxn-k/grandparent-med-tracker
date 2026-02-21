@@ -30,6 +30,7 @@ export default async function DashboardPage(): Promise<React.ReactElement> {
       patient_phone_number: row.patient_phone_number as string | undefined,
       patient_name: row.patient_name as string | undefined,
       time_due: row.time_due as string | undefined,
+      taken: row.taken as boolean | undefined,
     })
   );
 

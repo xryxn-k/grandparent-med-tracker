@@ -87,20 +87,35 @@ export default function CaregiverDashboard({
     }
   }, [router]);
 
+  const handleToggleTaken = useCallback(async (row: MedicationScheduleRow) => {
+    if (!row.id) return;
+    try {
+      const newTakenStatus = !row.taken;
+      await fetch(`/api/medication/${row.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ taken: newTakenStatus }),
+      });
+      router.refresh();
+    } catch {
+      // Ignore; UI already updated
+    }
+  }, [router]);
+
   const handleEditSaved = useCallback(() => {
     router.refresh();
   }, [router]);
 
   return (
     <div className="relative min-h-screen overflow-hidden font-sans">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#524E75] via-[#3d3958] to-[#78516D]" />
+      <div className="absolute inset-0 bg-background" />
       <div
-        className="absolute inset-0 opacity-[0.06]"
+        className="absolute inset-0 opacity-[0.02]"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10v40M10 30h40' stroke='%23FFEECB' stroke-width='1' fill='none'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10v40M10 30h40' stroke='%237CB342' stroke-width='1' fill='none'/%3E%3C/svg%3E")`,
         }}
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-[#B75D49]/10" />
+      <div className="absolute inset-0 bg-gradient-to-t from-senior-green/5 via-transparent to-senior-blue/5" />
       {editingRow && (
         <EditMedicationModal
           row={editingRow}
@@ -109,31 +124,31 @@ export default function CaregiverDashboard({
         />
       )}
 
-      <main className="relative z-10 mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
+      <main className="relative z-10 w-full px-4 py-6 sm:px-6 lg:px-8">
         <header className="mb-6 flex flex-wrap items-center justify-between gap-4">
           <Link
             href="/"
-            className="text-xl font-bold tracking-tight text-cream"
+            className="text-xl font-bold tracking-tight text-foreground"
           >
             MedCare
           </Link>
           <div className="flex items-center gap-2">
             <Link
               href="/"
-              className="rounded-xl border border-glass bg-glass px-3 py-2 text-sm font-medium text-graphite-slate shadow-soft backdrop-blur-md hover:bg-white/10"
+              className="rounded-xl border border-glass bg-glass px-3 py-2 text-sm font-medium text-foreground/80 shadow-soft backdrop-blur-md hover:bg-primary/10"
             >
               Home
             </Link>
             <Link
               href="/login"
-              className="rounded-xl border border-glass bg-goldenrod/30 px-4 py-2 text-sm font-medium text-cream shadow-soft backdrop-blur-md hover:bg-goldenrod/50"
+              className="rounded-xl border border-glass bg-primary/30 px-4 py-2 text-sm font-medium text-foreground shadow-soft backdrop-blur-md hover:bg-primary/50"
             >
               Sign in
             </Link>
           </div>
         </header>
 
-        <h1 className="mb-6 text-2xl font-bold text-cream">
+        <h1 className="mb-6 text-2xl font-bold text-foreground">
           Caregiver dashboard
         </h1>
 
@@ -144,8 +159,8 @@ export default function CaregiverDashboard({
             onClick={() => setActiveTab("add-data")}
             className={`flex-1 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
               activeTab === "add-data"
-                ? "bg-goldenrod/40 text-cream"
-                : "text-graphite-slate hover:bg-white/5"
+                ? "bg-primary/40 text-foreground"
+                : "text-foreground/80 hover:bg-foreground/5"
             }`}
           >
             Add Data
@@ -155,8 +170,8 @@ export default function CaregiverDashboard({
             onClick={() => setActiveTab("preview-schedule")}
             className={`flex-1 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
               activeTab === "preview-schedule"
-                ? "bg-goldenrod/40 text-cream"
-                : "text-graphite-slate hover:bg-white/5"
+                ? "bg-primary/40 text-foreground"
+                : "text-foreground/80 hover:bg-foreground/5"
             }`}
           >
             Preview schedule
@@ -176,10 +191,10 @@ export default function CaregiverDashboard({
         {activeTab === "preview-schedule" && (
           <section className="space-y-6">
             <div className="rounded-2xl border border-glass bg-glass p-6 shadow-soft backdrop-blur-md">
-              <h2 className="mb-4 text-lg font-semibold text-cream">
+              <h2 className="mb-4 text-lg font-semibold text-foreground">
                 Whose schedule is this?
               </h2>
-              <p className="mb-4 text-sm text-graphite-slate">
+              <p className="mb-4 text-sm text-foreground/80">
                 {selectedPatientId === "all"
                   ? "Viewing all patients."
                   : `Viewing schedule for ${patients.find((p) => p.id === selectedPatientId)?.displayName ?? "this person"}.`}
@@ -190,8 +205,8 @@ export default function CaregiverDashboard({
                   onClick={() => setSelectedPatientId("all")}
                   className={`rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors ${
                     selectedPatientId === "all"
-                      ? "border-goldenrod/50 bg-goldenrod/20 text-cream"
-                      : "border-glass bg-white/5 text-graphite-slate shadow-soft backdrop-blur-md hover:bg-white/10"
+                      ? "border-primary/50 bg-primary/20 text-foreground"
+                      : "border-glass bg-light-gray/10 text-foreground/80 shadow-soft backdrop-blur-md hover:bg-primary/10"
                   }`}
                 >
                   All
@@ -203,15 +218,15 @@ export default function CaregiverDashboard({
                     onClick={() => setSelectedPatientId(p.id)}
                     className={`rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors ${
                       selectedPatientId === p.id
-                        ? "border-goldenrod/50 bg-goldenrod/20 text-cream"
-                        : "border-glass bg-white/5 text-graphite-slate shadow-soft backdrop-blur-md hover:bg-white/10"
+                        ? "border-primary/50 bg-primary/20 text-foreground"
+                        : "border-glass bg-light-gray/10 text-foreground/80 shadow-soft backdrop-blur-md hover:bg-primary/10"
                     }`}
                   >
                     {p.displayName}
                   </button>
                 ))}
                 {patients.length === 0 && (
-                  <p className="text-sm text-graphite-slate">
+                  <p className="text-sm text-foreground/80">
                     Add a prescription or medicines to see profiles here.
                   </p>
                 )}
@@ -219,12 +234,12 @@ export default function CaregiverDashboard({
             </div>
 
             <div>
-              <h2 className="mb-4 text-lg font-semibold text-cream">
+              <h2 className="mb-4 text-lg font-semibold text-foreground">
                 Existing schedule
               </h2>
               {filteredSchedules.length === 0 ? (
                 <div className="rounded-2xl border border-dashed border-glass bg-glass p-8 text-center shadow-soft backdrop-blur-md">
-                  <p className="text-graphite-slate">
+                  <p className="text-foreground/80">
                     {schedules.length === 0
                       ? "No medications scheduled yet. Use Add Data to upload a prescription or add medicines."
                       : "No medications for this person, or none left after deletions. Select another or add new entries."}
@@ -240,31 +255,43 @@ export default function CaregiverDashboard({
                         className={`flex w-full flex-wrap items-center gap-4 border-b border-glass px-4 py-4 last:border-b-0 ${ROW_TINTS[index % ROW_TINTS.length]}`}
                       >
                         <div className="min-w-0 flex-1">
-                          <p className="font-medium text-graphite-olive">
+                          <p className="font-medium text-foreground">
                             {row.medication_name ?? "—"}
                           </p>
-                          <p className="text-sm text-graphite-slate">
+                          <p className="text-sm text-foreground/80">
                             {row.dosage ?? "—"}
                           </p>
                         </div>
-                        <div className="shrink-0 text-sm text-graphite-slate">
+                        <div className="shrink-0 text-sm text-foreground/80">
                           {row.patient_phone_number ?? row.patient_name ?? "—"}
                         </div>
-                        <div className="shrink-0 text-sm font-medium text-graphite-olive">
+                        <div className="shrink-0 text-sm font-medium text-foreground">
                           Due: {row.time_due ?? "—"}
                         </div>
                         <div className="flex shrink-0 items-center gap-2">
                           <button
                             type="button"
+                            onClick={() => handleToggleTaken(row)}
+                            className={`rounded-lg px-2 py-1 text-sm font-bold transition-colors ${
+                              row.taken
+                                ? "text-secondary hover:bg-secondary/20"
+                                : "text-accent hover:bg-accent/20"
+                            }`}
+                            title={row.taken ? "Mark as not taken" : "Mark as taken"}
+                          >
+                            {row.taken ? "✓" : "✗"}
+                          </button>
+                          <button
+                            type="button"
                             onClick={() => setEditingRow(row)}
-                            className="rounded-lg border border-glass bg-goldenrod/30 px-3 py-1.5 text-xs font-medium text-cream transition-colors hover:bg-goldenrod/50"
+                            className="rounded-lg border border-glass bg-primary/30 px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-primary/50"
                           >
                             Edit
                           </button>
                           <button
                             type="button"
                             onClick={() => handleDelete(row, index)}
-                            className="rounded-lg border border-glass bg-terracotta/40 px-3 py-1.5 text-xs font-medium text-red-200 transition-colors hover:bg-terracotta/60"
+                            className="rounded-lg border border-glass bg-accent/40 px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-accent/60"
                           >
                             Delete
                           </button>
