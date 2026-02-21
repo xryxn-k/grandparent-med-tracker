@@ -34,5 +34,56 @@ export default async function DashboardPage(): Promise<React.ReactElement> {
     })
   );
 
-  return <CaregiverDashboard schedules={rows} />;
+  // Add mock data if no real data exists
+  const mockData: MedicationScheduleRow[] = [
+    {
+      id: "mock-1",
+      medication_name: "Lisinopril",
+      dosage: "10mg",
+      patient_name: "Grandma Mary",
+      patient_phone_number: "555-0123",
+      time_due: "08:00",
+      taken: false,
+    },
+    {
+      id: "mock-2",
+      medication_name: "Metformin",
+      dosage: "500mg",
+      patient_name: "Grandma Mary",
+      patient_phone_number: "555-0123",
+      time_due: "12:00",
+      taken: true,
+    },
+    {
+      id: "mock-3",
+      medication_name: "Aspirin",
+      dosage: "81mg",
+      patient_name: "Grandpa John",
+      patient_phone_number: "555-0456",
+      time_due: "09:00",
+      taken: false,
+    },
+    {
+      id: "mock-4",
+      medication_name: "Vitamin D3",
+      dosage: "2000 IU",
+      patient_name: "Grandpa John",
+      patient_phone_number: "555-0456",
+      time_due: "18:00",
+      taken: false,
+    },
+    {
+      id: "mock-5",
+      medication_name: "Omega-3 Fish Oil",
+      dosage: "1000mg",
+      patient_name: "Grandma Mary",
+      patient_phone_number: "555-0123",
+      time_due: "20:00",
+      taken: true,
+    },
+  ];
+
+  const finalSchedules = rows.length > 0 ? rows : mockData;
+
+  return <CaregiverDashboard schedules={finalSchedules} />;
 }

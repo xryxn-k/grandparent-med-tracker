@@ -96,7 +96,7 @@ export default function ManualMedicationForm(): React.ReactElement {
             type="text"
             value={patientName}
             onChange={(e) => setPatientName(e.target.value)}
-            placeholder="e.g. Grandpa Anil"
+            placeholder="Rajesh Kumar"
             className="w-full rounded-xl border border-glass bg-light-gray px-3 py-2 text-foreground placeholder-foreground/60 backdrop-blur-md focus:border-senior-green focus:outline-none focus:ring-1 focus:ring-senior-green"
           />
         </div>
@@ -105,14 +105,14 @@ export default function ManualMedicationForm(): React.ReactElement {
             htmlFor="manual-phone"
             className="mb-1.5 block text-sm font-medium text-foreground/80"
           >
-            Grandparent&apos;s Phone (+91...)
+            Patient Phone Number
           </label>
           <input
             id="manual-phone"
             type="tel"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            placeholder="+91 98765 43210"
+            placeholder="+919876543210"
             className="w-full rounded-xl border border-glass bg-light-gray px-3 py-2 text-foreground placeholder-foreground/60 backdrop-blur-md focus:border-senior-green focus:outline-none focus:ring-1 focus:ring-senior-green"
             required
           />
@@ -145,7 +145,7 @@ export default function ManualMedicationForm(): React.ReactElement {
               />
               <input
                 type="text"
-                placeholder="Dosage"
+                placeholder="1 Pill"
                 value={row.dosage}
                 onChange={(e) => updateRow(i, "dosage", e.target.value)}
                 className="w-24 rounded-lg border border-glass bg-light-gray px-2 py-1.5 text-sm text-foreground placeholder-foreground/60 focus:border-senior-green focus:outline-none"

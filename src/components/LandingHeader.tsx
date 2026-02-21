@@ -17,10 +17,16 @@ export function setSignedIn(value: boolean): void {
 }
 
 export default function LandingHeader(): React.ReactElement {
-  const [signedIn, setSignedInState] = useState(false);
+  const [signedIn, setSignedInState] = useState(() => isSignedIn());
 
   useEffect(() => {
-    setSignedInState(isSignedIn());
+    // Listen for storage changes (in case signed in/out in another tab)
+    const handleStorageChange = () => {
+      setSignedInState(isSignedIn());
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
 
   if (signedIn) {
