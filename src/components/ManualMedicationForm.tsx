@@ -2,13 +2,17 @@
 
 import { useState, FormEvent } from "react";
 
+interface ManualMedicationFormProps {
+  onSuccess?: () => void;
+}
+
 type MedicationEntry = {
   medication_name: string;
   dosage: string;
   time_due: string;
 };
 
-export default function ManualMedicationForm(): React.ReactElement {
+export default function ManualMedicationForm({ onSuccess }: ManualMedicationFormProps): React.ReactElement {
   const [patientName, setPatientName] = useState("");
   const [phone, setPhone] = useState("");
   const [medications, setMedications] = useState<MedicationEntry[]>([
@@ -71,6 +75,7 @@ export default function ManualMedicationForm(): React.ReactElement {
       setPatientName("");
       setPhone("");
       setMedications([{ medication_name: "", dosage: "", time_due: "" }]);
+      onSuccess?.();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {

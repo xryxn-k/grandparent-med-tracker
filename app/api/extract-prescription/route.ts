@@ -1,19 +1,30 @@
 import { NextResponse } from 'next/server';
 import { GoogleGenAI } from '@google/genai';
 import { createClient } from '@supabase/supabase-js';
+import { loadEnvConfig } from '@next/env';
 
-// Initialize Clients
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+// Workaround: explicitly load .env.local (Turbopack sometimes doesn't load it for API routes)
+const projectDir = process.cwd();
+loadEnvConfig(projectDir);
 
 export async function POST(req: Request) {
   try {
+    const geminiKey = process.env.GEMINI_API_KEY;
+    if (!geminiKey?.trim()) {
+      return NextResponse.json(
+        { error: 'GEMINI_API_KEY is not set. Add it to .env.local and restart the dev server.', message: 'Gemini API key is missing.' },
+        { status: 500 }
+      );
+    }
+
+    const ai = new GoogleGenAI({ apiKey: geminiKey });
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
     // 1. Grab the uploaded image and the patient's phone number from the form
     const formData = await req.formData();
-    const file = formData.get('file') as File;
+    const file = (formData.get('file') ?? formData.get('image')) as File;
     const patientPhoneNumber = (formData.get('patient_phone_number') as string) || (formData.get('phone') as string);
     const patientName = (formData.get('patient_name') as string) || 'Patient';
 
@@ -102,19 +113,20 @@ Extract the schedule from this prescription. Return ONLY valid JSON, no other te
     const err = error as { status?: number; statusCode?: number; code?: string; message?: string };
     if (err?.status === 401 || err?.statusCode === 401 || err?.code === 'invalid_api_key') {
       return NextResponse.json(
-        { error: 'Gemini API key is invalid or expired. Check GEMINI_API_KEY in .env.local' },
+        { error: 'Gemini API key is invalid or expired. Check GEMINI_API_KEY in .env.local', message: 'Gemini API key is invalid or expired.' },
         { status: 500 }
       );
     }
     if (err?.message?.includes('Invalid supabaseUrl')) {
       return NextResponse.json(
         {
-          error:
-            'Supabase credentials misconfigured. Check NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY',
+          error: 'Supabase credentials misconfigured. Check NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY',
+          message: 'Supabase credentials misconfigured.',
         },
         { status: 500 }
       );
     }
-    return NextResponse.json({ error: 'Failed to process prescription' }, { status: 500 });
+    const msg = (err as { message?: string })?.message ?? 'Failed to process prescription';
+    return NextResponse.json({ error: msg, message: msg }, { status: 500 });
   }
 }

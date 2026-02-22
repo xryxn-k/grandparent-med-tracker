@@ -2,7 +2,11 @@
 
 import { useState, FormEvent } from "react";
 
-export default function FamilyMemberForm(): React.ReactElement {
+interface FamilyMemberFormProps {
+  onSuccess?: () => void;
+}
+
+export default function FamilyMemberForm({ onSuccess }: FamilyMemberFormProps): React.ReactElement {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -27,6 +31,7 @@ export default function FamilyMemberForm(): React.ReactElement {
       setSuccess(true);
       setName("");
       setPhone("");
+      onSuccess?.();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {

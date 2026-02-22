@@ -2,7 +2,11 @@
 
 import { useState, FormEvent } from "react";
 
-export default function UploadForm(): React.ReactElement {
+interface UploadFormProps {
+  onSuccess?: () => void;
+}
+
+export default function UploadForm({ onSuccess }: UploadFormProps): React.ReactElement {
   const [patientName, setPatientName] = useState("");
   const [phone, setPhone] = useState("");
   const [file, setFile] = useState<File | null>(null);
@@ -46,6 +50,7 @@ export default function UploadForm(): React.ReactElement {
       setFile(null);
       const form = e.target as HTMLFormElement;
       if (typeof form.reset === "function") form.reset();
+      onSuccess?.();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {

@@ -108,14 +108,14 @@ export default function CaregiverDashboard({
 
   return (
     <div className="relative min-h-screen overflow-hidden font-sans">
-      <div className="absolute inset-0 bg-background" />
+      <div className="pointer-events-none absolute inset-0 bg-background" />
       <div
-        className="absolute inset-0 opacity-[0.02]"
+        className="pointer-events-none absolute inset-0 opacity-[0.02]"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10v40M10 30h40' stroke='%237CB342' stroke-width='1' fill='none'/%3E%3C/svg%3E")`,
         }}
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-senior-green/5 via-transparent to-senior-blue/5" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-senior-green/5 via-transparent to-senior-blue/5" />
       {editingRow && (
         <EditMedicationModal
           row={editingRow}
@@ -181,10 +181,10 @@ export default function CaregiverDashboard({
         {activeTab === "add-data" && (
           <section className="space-y-6">
             <div className="rounded-2xl border border-glass bg-glass p-6 shadow-soft backdrop-blur-md">
-              <UploadForm />
+              <UploadForm onSuccess={() => router.refresh()} />
             </div>
-            <ManualMedicationForm />
-            <FamilyMemberForm />
+            <ManualMedicationForm onSuccess={() => router.refresh()} />
+            <FamilyMemberForm onSuccess={() => router.refresh()} />
           </section>
         )}
 
