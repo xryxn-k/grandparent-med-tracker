@@ -1,0 +1,10 @@
+{
+  "name": "grandparent-med-tracker-root",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix grandparent-med-tracker",
+    "build": "npm run build --prefix grandparent-med-tracker",
+    "start": "npm run start --prefix grandparent-med-tracker",
+    "lint": "npm run lint --prefix grandparent-med-tracker"
+  }
+}
